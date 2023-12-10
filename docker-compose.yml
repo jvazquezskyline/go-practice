@@ -1,0 +1,33 @@
+version: "3.2"
+
+services:
+  camera-service:
+    build: 
+      context: ./service/
+    ports:
+      - 1323:1323
+    networks:
+      - camera-network
+      - bridge
+    environment:
+      DB_NAME: ${DB_NAME}
+    volumes:
+      - ./service:/app
+
+  mongo:
+    image: mongo:4-bionic
+    restart: always
+    networks:
+      - camera-network
+      - bridge
+    ports:
+      - 27017:27017
+    
+  
+networks:
+  bridge:
+    driver: bridge
+  camera-network:
+    labels:
+      net.camera-network.net: "camera-network"
+    internal: true

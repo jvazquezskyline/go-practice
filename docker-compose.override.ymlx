@@ -1,0 +1,7 @@
+version: "3.7"
+
+
+services:
+  camera-service:
+    # volumes:
+    #   - ./service/src:/app/src
